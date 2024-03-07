@@ -1,41 +1,43 @@
 import logo from "./logo.svg";
 import "./App.css";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import React, { useState } from "react";
+import Product from "./components/Product";
 function App() {
   const [products, setProducts] = useState([
     {
       id: 1,
       title: "Apple",
       price: 25,
-      image: "./public/apple.jpg",
+      image: "/apple.jpg",
       quantity: 0,
     },
     {
       id: 2,
       title: "Indian Guava",
       price: 15,
-      image: "./public/guava.jpg",
+      image: "/guava.jpg",
       quantity: 0,
     },
     {
       id: 3,
       title: "Pineapple",
       price: 30,
-      image: "./public/pineapple.jpg",
+      image: "/pineapple.jpg",
       quantity: 0,
     },
     {
       id: 4,
       title: "Strawberry",
       price: 10,
-      image: "./public/strawberry.jpg",
+      image: "/strawberry.jpg",
       quantity: 0,
     },
     {
       id: 5,
       title: "Pomogranate",
       price: 25,
-      image: "./public/pomo.jpg",
+      image: "/pomo.jpg",
       quantity: 0,
     },
     {
@@ -49,18 +51,24 @@ function App() {
       id: 7,
       title: "Water melon",
       price: 40,
-      image: "./public/melon.jpg",
+      image: "/melon.jpg",
       quantity: 0,
     },
     {
       id: 8,
       title: "Peach",
       price: 20,
-      image: "./public/peach.jpg",
+      image: "/peach.jpg",
       quantity: 0,
     },
   ]);
-  return <></>;
+  return (
+    <Router>
+      {products.map((product) => {
+        return <Product product={product} />;
+      })}
+    </Router>
+  );
 }
 
 export default App;
