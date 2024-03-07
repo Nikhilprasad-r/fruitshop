@@ -3,6 +3,9 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import React, { useState } from "react";
 import Product from "./components/Product";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 function App() {
   const [products, setProducts] = useState([
     {
@@ -62,11 +65,51 @@ function App() {
       quantity: 0,
     },
   ]);
+  const [cart, setCart] = useState([]);
+  const addToCart = (product, removeAll = false) => {
+    const existingItemIndex = cart.findIndex((item) => item.id === product.id);
+    if (existingItemIndex !== -1) {
+      const updatedCart = [...cart];
+      if (removeAll) {
+        updatedCart.splice(existingItemIndex, 1);
+      } else {
+        updatedCart[existingItemIndex].quantity++;
+      }
+      setCart(updatedCart);
+    } else {
+      setCart([...cart, { ...product, quantity: 1 }]);
+    }
+  };
+  const removeFromCart = (productId) => {
+    const updatedCart = cart
+      .map((item) => {
+        if (item.id === productId && item.quantity > 0) {
+          return { ...item, quantity: item.quantity - 1 };
+        }
+        return item;
+      })
+      .filter((item) => item.quantity !== 0);
+    setCart(updatedCart);
+  };
+  const removeAllFromCart = (productId) => {
+    const updatedCart = cart.filter((item) => item.id !== productId);
+    setCart(updatedCart);
+  };
+
   return (
     <Router>
-      {products.map((product) => {
-        return <Product product={product} />;
-      })}
+      <div className="App">
+        <Navbar cart={cart} />
+        <Switch>
+          <Route path="/" exact>
+            <Header />
+            {products.map((product) => {
+              return <Product product={product} />;
+            })}
+          </Route>
+          <Footer />
+        </Switch>
+      </div>
     </Router>
   );
 }
