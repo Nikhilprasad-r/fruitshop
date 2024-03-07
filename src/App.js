@@ -6,6 +6,7 @@ import Product from "./components/Product";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import CartPage from "./components/CartPage";
 function App() {
   const [products, setProducts] = useState([
     {
@@ -119,6 +120,9 @@ function App() {
                 </div>
               </div>
             </section>
+          </Route>
+          <Route path="/cart">
+            <CartPage />
           </Route>
         </Switch>
         <Footer />
