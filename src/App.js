@@ -47,7 +47,7 @@ function App() {
       id: 6,
       title: "Orange",
       price: 15,
-      image: "./public/orange.jpg",
+      image: "/orange.jpg",
       quantity: 0,
     },
     {
@@ -103,12 +103,25 @@ function App() {
         <Switch>
           <Route path="/" exact>
             <Header />
-            {products.map((product) => {
-              return <Product product={product} />;
-            })}
+            <section className="py-5">
+              <div className="container px-4 px-lg-5 mt-5">
+                <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                  {products.map((product) => (
+                    <Product
+                      key={product.id}
+                      product={product}
+                      addToCart={addToCart}
+                      removeFromCart={removeFromCart}
+                      removeAllFromCart={removeAllFromCart}
+                      cart={cart}
+                    />
+                  ))}
+                </div>
+              </div>
+            </section>
           </Route>
-          <Footer />
         </Switch>
+        <Footer />
       </div>
     </Router>
   );
