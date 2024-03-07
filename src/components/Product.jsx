@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React from 'react';
-
+import { IoAddCircleSharp } from "react-icons/io5";
+import { FaMinusCircle } from "react-icons/fa";
 function Product({ product, addToCart, removeFromCart,removeAllFromCart,cart }) {
   const { title, price, id,quantity } = product;
 console.log(quantity);
@@ -20,8 +21,10 @@ console.log(quantity);
          
               
             
-            {cart.find(item => item.id === id) ? (
-                  <button className="btn btn-outline-danger mt-2" onClick={() => removeAllFromCart(id)}>Remove All</button>
+            
+          {cart.find(item => item.id === id) ? (<>
+              <IoAddCircleSharp size={35}onClick={() => addToCart(product)}/>
+                  <button className="btn btn-outline-danger mt-2" onClick={() => removeAllFromCart(id)}>Remove All</button><FaMinusCircle size={30} onClick={() => removeFromCart(product.id)}/></>
                 ):( <button className="btn btn-outline-dark mt-2" onClick={() => addToCart(product)}>
                 Add to Cart
               </button>)}
