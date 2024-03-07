@@ -122,7 +122,12 @@ function App() {
             </section>
           </Route>
           <Route path="/cart">
-            <CartPage />
+            <CartPage
+              cart={cart}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
+              removeAllFromCart={removeAllFromCart}
+            />
           </Route>
         </Switch>
         <Footer />
